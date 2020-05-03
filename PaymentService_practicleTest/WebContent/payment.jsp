@@ -8,7 +8,7 @@
 <title>Payment Service</title>
 <link rel="stylesheet" href="views/bootstrap.min.css.css">
 <script src="Components/jquery-3.4.1.min.js"></script>
-<script src="Components/items.js"></script>
+<script src="Components/payment.js"></script>
 </head>
 <body>
 	<div class="container">

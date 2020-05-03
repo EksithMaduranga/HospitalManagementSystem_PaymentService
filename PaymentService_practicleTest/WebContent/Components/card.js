@@ -27,7 +27,7 @@ $(document).on("click", "#btnSave", function(event) {
 	// If valid------------------------
 	var type = ($("#hidItemIDSave").val() == "") ? "POST" : "PUT";
 	$.ajax({
-		url : "ItemsAPI",
+		url : "CardAPI",
 		type : type,
 		data : $("#formItem").serialize(),
 		dataType : "text",
@@ -63,17 +63,19 @@ function onItemSaveComplete(response, status) {
 // UPDATE==========================================
 $(document).on("click", ".btnUpdate", function(event) {
 			$("#hidItemIDSave").val( $(this).closest("tr").find('#hidItemIDUpdate').val());
-			$("#paymentType").val($(this).closest("tr").find('td:eq(0)').text());
-			$("#appointmentId").val($(this).closest("tr").find('td:eq(1)').text());
-			$("#patientId").val($(this).closest("tr").find('td:eq(2)').text());
+			$("#cardNo").val($(this).closest("tr").find('td:eq(0)').text());
+			$("#holderName").val($(this).closest("tr").find('td:eq(2)').text());
+			$("#expiryDate").val($(this).closest("tr").find('td:eq(3)').text());
+			$("#cvv").val($(this).closest("tr").find('td:eq(4)').text());
+			$("#paymentNo").val($(this).closest("tr").find('td:eq(1)').text());
 		});
 
 // Delete============================================
 $(document).on("click", ".btnRemove", function(event) {
 	$.ajax({
-		url : "ItemsAPI",
+		url : "CardAPI",
 		type : "DELETE",
-		data : "itemID=" + $(this).data("paymentNo"),
+		data : "cardNo=" + $(this).data("itemid"),
 		dataType : "text",
 		complete : function(response, status) {
 			onItemDeleteComplete(response.responseText, status);
@@ -105,36 +107,50 @@ function onItemDeleteComplete(response, status) {
 //CLIENTMODEL=========================================================================
 function validateItemForm()
 {
-// CODE
-if ($("#paymentType").val().trim() == "")
+//paymentType
+if ($("#cardNo").val().trim() == "")
  {
- return "Insert Payment Type.";
+ return "Insert Card No.";
  }
-// NAME
-if ($("#appointmentId").val().trim() == "")
+//appointmentId
+if ($("#holderName").val().trim() == "")
  {
- return "Insert Appointment ID.";
+ return "Insert Cardholder Name.";
  } 
-
-//PRICE-------------------------------
-if ($("#patientId").val().trim() == "")
+//patientId-------------------------------
+if ($("#expiryDate").val().trim() == "")
  {
- return "Insert patient ID.";
+ return "Insert Expiry Date.";
+ }
+//cvv-------------------------------
+if ($("#cvv").val().trim() == "")
+ {
+ return "Insert CVV No.";
+ }
+//paymentNo-------------------------------
+if ($("#paymentNo").val().trim() == "")
+ {
+ return "Insert Payment No.";
  }
 // is numerical value
-var tmpAid = $("#appointmentId").val().trim();
-if (!$.isNumeric(tmpAid))
+var tmpCNo = $("#cardNo").val().trim();
+if (!$.isNumeric(tmpCNo))
  {
- return "Insert a numerical value for Appointment ID.";
+ return "Insert a numerical value for Card No.";
  }
-var tmpPid = $("#patientId").val().trim();
-if (!$.isNumeric(tmpPid))
+var tmpCvv = $("#cvv").val().trim();
+if (!$.isNumeric(tmpCvv))
  {
- return "Insert a numerical value for Patient ID.";
+ return "Insert a numerical value for CVV No.";
+ }
+var tmpPNo = $("#paymentNo").val().trim();
+if (!$.isNumeric(tmpPNo))
+ {
+ return "Insert a numerical value for Payment No.";
  }
 // convert to integer ID
- $("#appointmentId").val(parseInt(tmpAid).toFixed(0));
- $("#patientId").val(parseInt(tmpPid).toFixed(0));
+ $("#cvv").val(parseInt(tmpCvv).toFixed(0));
+ $("#paymentNo").val(parseInt(tmpPNo).toFixed(0));
 
 return true;
 }

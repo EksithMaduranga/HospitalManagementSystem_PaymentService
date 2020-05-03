@@ -27,7 +27,7 @@ $(document).on("click", "#btnSave", function(event) {
 	// If valid------------------------
 	var type = ($("#hidItemIDSave").val() == "") ? "POST" : "PUT";
 	$.ajax({
-		url : "ItemsAPI",
+		url : "PaymentAPI",
 		type : type,
 		data : $("#formItem").serialize(),
 		dataType : "text",
@@ -63,17 +63,17 @@ function onItemSaveComplete(response, status) {
 // UPDATE==========================================
 $(document).on("click", ".btnUpdate", function(event) {
 			$("#hidItemIDSave").val( $(this).closest("tr").find('#hidItemIDUpdate').val());
-			$("#paymentType").val($(this).closest("tr").find('td:eq(0)').text());
-			$("#appointmentId").val($(this).closest("tr").find('td:eq(1)').text());
-			$("#patientId").val($(this).closest("tr").find('td:eq(2)').text());
+			$("#paymentType").val($(this).closest("tr").find('td:eq(1)').text());
+			$("#appointmentId").val($(this).closest("tr").find('td:eq(4)').text());
+			$("#patientId").val($(this).closest("tr").find('td:eq(5)').text());
 		});
 
 // Delete============================================
 $(document).on("click", ".btnRemove", function(event) {
 	$.ajax({
-		url : "ItemsAPI",
+		url : "PaymentAPI",
 		type : "DELETE",
-		data : "itemID=" + $(this).data("paymentNo"),
+		data : "paymentNo=" + $(this).data("itemid"),
 		dataType : "text",
 		complete : function(response, status) {
 			onItemDeleteComplete(response.responseText, status);
@@ -105,18 +105,18 @@ function onItemDeleteComplete(response, status) {
 //CLIENTMODEL=========================================================================
 function validateItemForm()
 {
-// CODE
+//paymentType
 if ($("#paymentType").val().trim() == "")
  {
  return "Insert Payment Type.";
  }
-// NAME
+//appointmentId
 if ($("#appointmentId").val().trim() == "")
  {
  return "Insert Appointment ID.";
  } 
 
-//PRICE-------------------------------
+//patientId-------------------------------
 if ($("#patientId").val().trim() == "")
  {
  return "Insert patient ID.";

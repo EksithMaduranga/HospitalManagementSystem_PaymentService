@@ -33,7 +33,8 @@ public class Payment {
 				String pId = Integer.toString(rs.getInt("patientID"));
 				// Add into the html table
 				output += "<tr><td><input id='hidItemIDUpdate'" + " name='hidItemIDUpdate' " + " type='hidden' value='"
-						+ paymentNo + "'>" + paymentType + "</td>";
+						+ paymentNo + "'>" + paymentNo + "</td>";
+				output += "<td>" + paymentType + "</td>";
 				output += "<td>" + amount + "</td>";
 				output += "<td>" + date + "</td>";
 				output += "<td>" + aId + "</td>";
@@ -48,7 +49,7 @@ public class Payment {
 			// Complete the html table
 			output += "</table>";
 		} catch (Exception e) {
-			output = "Error while reading the items.";
+			output = "Error while reading the payments.";
 			System.err.println(e.getMessage());
 		}
 		return output;
@@ -151,7 +152,7 @@ public class Payment {
 				}
 			} 
 		else {
-				output = "{\"status\":\"error\", \"data\":\"Error while updating the item.\"}";
+				output = "{\"status\":\"error\", \"data\":\"Error while updating the payment.\"}";
 			}
 		
 		
@@ -179,7 +180,7 @@ public class Payment {
 			String newPayment = readPayment();
 			output = "{\"status\":\"success\", \"data\": \"" + newPayment + "\"}";
 		} catch (Exception e) {
-			output = "{\"status\":\"error\", \"data\":\"Error while updating the item.\"}";
+			output = "{\"status\":\"error\", \"data\":\"Error while updating the payment.\"}";
 			System.err.println(e.getMessage());
 		}
 		return output;
@@ -203,7 +204,7 @@ public class Payment {
 			String newPayment = readPayment();
 			output = "{\"status\":\"success\", \"data\": \"" + newPayment + "\"}";
 		} catch (Exception e) {
-			output = "{\"status\":\"error\", \"data\": \"Error while deleting the item.\"}";
+			output = "{\"status\":\"error\", \"data\": \"Error while deleting the payment.\"}";
 			System.err.println(e.getMessage());
 		}
 		return output;

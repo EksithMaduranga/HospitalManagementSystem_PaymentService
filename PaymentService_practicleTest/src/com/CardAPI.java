@@ -1,27 +1,28 @@
 package com;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Scanner;
+
 /**
- * Servlet implementation class PaymentAPI
+ * Servlet implementation class CardAPI
  */
-@WebServlet("/PaymentAPI")
-public class PaymentAPI extends HttpServlet {
+@WebServlet("/CardAPI")
+public class CardAPI extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	Payment itemObj = new Payment();
+	Card itemObj = new Card();
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public PaymentAPI() {
+    public CardAPI() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,8 +39,8 @@ public class PaymentAPI extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String output = itemObj.insertPayment(request.getParameter("patientId"), request.getParameter("appointmentId"),
-				request.getParameter("paymentType"));
+		String output = itemObj.insertCard(request.getParameter("cardNo"), request.getParameter("holderName"),
+				request.getParameter("expiryDate"), request.getParameter("cvv"), request.getParameter("paymentNo"));
 		response.getWriter().write(output);
 	}
 
@@ -48,11 +49,12 @@ public class PaymentAPI extends HttpServlet {
 	 */
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Map paras = getParasMap(request);
-		 String output = itemObj.updatePayment(paras.get("hidItemIDSave").toString(),
-		 paras.get("paymentType").toString(),
-		 paras.get("patientId").toString(),
-		paras.get("appointmentId").toString());
+		 String output = itemObj.updateCard(paras.get("hidItemIDSave").toString(),
+		 paras.get("holderName").toString(),
+		 paras.get("expiryDate").toString(),
+		paras.get("cvv").toString());
 		response.getWriter().write(output); 
+
 	}
 
 	/**
@@ -60,7 +62,7 @@ public class PaymentAPI extends HttpServlet {
 	 */
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Map paras = getParasMap(request);
-		 String output = itemObj.deletePayment(paras.get("paymentNo").toString());
+		 String output = itemObj.deleteCard(paras.get("cardNo").toString());
 		response.getWriter().write(output);
 	}
 	

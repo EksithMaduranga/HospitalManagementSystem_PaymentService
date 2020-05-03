@@ -17,7 +17,7 @@ public class dbconnect {
 		con= DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/hospitaldb",
 		"root", "");
 		//For testing
-		System.out.println("Successfully connected---1");
+		System.out.println("Successfully connected");
 		
 		}
 		catch(Exception e)
