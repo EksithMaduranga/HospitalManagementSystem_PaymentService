@@ -18,7 +18,7 @@ public class Payment {
 			}
 			// Prepare the html table to be displayed
 			output = "<table border='1'><tr><th>Payment No</th> <th>Payment Type</th><th>Amount</th>"
-					+ "<th>Date</th><th>Appointment ID</th><th>Patient ID</th>" + "<th>Update</th><th>Remove</th></tr>";
+					+ "<th>Date</th><th>Appointment ID</th><th>Patient ID</th>" + "<th>Remove</th></tr>";
 
 			String query = "select * from payment";
 			Statement stmt = con.createStatement();
@@ -40,8 +40,7 @@ public class Payment {
 				output += "<td>" + aId + "</td>";
 				output += "<td>" + pId + "</td>";
 				// buttons
-				output += "<td><input name='btnUpdate'" + " type='button' value='Update'"
-						+ "class='btnUpdate btn btn-secondary'></td>" + "<td><input name='btnRemove'"
+				output += "<td><input name='btnRemove'"
 						+ "type='button' value='Remove'" + " class='btnRemove btn btn-danger'" + " data-itemid='"
 						+ paymentNo + "'>" + "</td></tr>";
 			}
