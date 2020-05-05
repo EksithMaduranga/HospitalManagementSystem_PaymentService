@@ -32,7 +32,7 @@ public class Payment {
 				String aId = Integer.toString(rs.getInt("appointmentID"));
 				String pId = Integer.toString(rs.getInt("patientID"));
 				// Add into the html table
-				output += "<tr><td><input id='hidItemIDUpdate'" + " name='hidItemIDUpdate' " + " type='hidden' value='"
+				output += "<tr><td><input id='hidIDUpdate'" + " name='hidIDUpdate' " + " type='hidden' value='"
 						+ paymentNo + "'>" + paymentNo + "</td>";
 				output += "<td>" + paymentType + "</td>";
 				output += "<td>" + amount + "</td>";
@@ -208,4 +208,72 @@ public class Payment {
 		}
 		return output;
 	}
+
+	public String readInput() {
+		String output = "";
+		try {
+			Connection con = object.connect();
+			if (con == null) {
+				return "Error while connecting to the database for reading";
+			}
+			// Prepare the html table to be displayed
+			output = "<table border='1'><tr><th>Payment No</th> <th>Payment Type</th><th>Amount</th>"
+					+ "<th>Date</th><th>Appointment ID</th><th>Patient ID</th>" + "<th>Remove</th></tr>";
+
+			String query = "SELECT * FROM payment ORDER BY paymentNo DESC LIMIT 1";
+			Statement stmt = con.createStatement();
+			ResultSet rs = stmt.executeQuery(query);
+			// iterate through the rows in the result set
+			while (rs.next()) {
+				String paymentNo = Integer.toString(rs.getInt("paymentNo"));
+				String paymentType = rs.getString("paymentType");
+				String amount = Float.toString(rs.getFloat("amount"));
+				String date = rs.getString("date");
+				String aId = Integer.toString(rs.getInt("appointmentID"));
+				String pId = Integer.toString(rs.getInt("patientID"));
+				// Add into the html table
+				output += "<tr><td><input id='hidIDUpdate'" + " name='hidIDUpdate' " + " type='hidden' value='"
+						+ paymentNo + "'>" + paymentNo + "</td>";
+				output += "<td>" + paymentType + "</td>";
+				output += "<td>" + amount + "</td>";
+				output += "<td>" + date + "</td>";
+				output += "<td>" + aId + "</td>";
+				output += "<td>" + pId + "</td>";
+				// buttons
+				output += "<td><input name='btnRemove'"
+						+ "type='button'  value='Remove'" + " class='btnRemove btn btn-danger'" + " data-itemid='"
+						+ paymentNo + "'>" + "</td></tr>";
+			}
+			con.close();
+			// Complete the html table
+			output += "</table>";
+		} catch (Exception e) {
+			output = "Error while reading the payments.";
+			System.err.println(e.getMessage());
+		}
+		return output;
+	}
+	
+	public String insertInput(String patientId, String appointmentId, String paymentType) {
+		String output;
+		
+		if (valObj.validateAppointmentId(appointmentId) != false && valObj.validatePatientId(patientId) != false) {
+				output = addPayment(patientId, appointmentId, paymentType);
+
+				if (output.equals("Inserted successfully")) {
+					// update payment status in appointment table
+					updatePaymentStatus(appointmentId);
+					String newPayment = readInput();
+					output = "{\"status\":\"success\", \"data\": \"" + newPayment + "\"}";
+				}
+			} 
+		else {
+				output = "{\"status\":\"error\", \"data\":\"Error while updating the payment.\"}";
+			}
+		
+		
+		return output;
+	}
+	
+
 }

@@ -1,16 +1,15 @@
 <%@page import="com.Payment"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+    pageEncoding="ISO-8859-1"%>
 <%@include file="/Header.jsp" %> 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Payment Service</title>
+<title>Admin Payment Service</title>
 <link rel="stylesheet" href="views/bootstrap.min.css.css">
 <script src="Components/jquery-3.4.1.min.js"></script>
-<script src="Components/payment.js"></script>
-
+<script src="Components/adminPayment.js"></script>
 <script>
 $(document).ready(function(){
   $("#divItemsGrid").click(function(){
@@ -22,7 +21,7 @@ $(document).ready(function(){
 <body style="background-color:#B0C4DE;">
 	<div style="text-align: center;position:relative;left:250px;top:50px;" class="container">
 		<div class="row">
-			<div style="background-color:#DCDCDC;height:600px;border-radius:10px;" class="col-6">
+			<div style="background-color:#DCDCDC;height:700px;border-radius:10px;" class="col-6">
 				<h1>Add Payment</h1>
 				<form id="formItem" name="formItem">
 					Payment Type: <br>
@@ -46,11 +45,11 @@ $(document).ready(function(){
 				<div id="divItemsGrid">
 					<%
 					Payment paymentObj = new Payment();
-					out.print(paymentObj.readInput());
+					out.print(paymentObj.readPayment());
 					%>
 				</div>
 				<br>
-				<a href="card.jsp"><input type="button" value="Proceed to Add Card Details" class="btn btn-primary"></a>
+				<a href="adminCard.jsp"><input type="button" value="Proceed to Add Card Details" class="btn btn-primary"></a>
 				<br>
 			</div>
 		</div>

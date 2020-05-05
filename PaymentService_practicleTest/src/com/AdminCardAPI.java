@@ -12,17 +12,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class CardAPI
+ * Servlet implementation class AdminCardAPI
  */
-@WebServlet("/CardAPI")
-public class CardAPI extends HttpServlet {
+@WebServlet("/AdminCardAPI")
+public class AdminCardAPI extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	Card cardObj = new Card();
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CardAPI() {
+    public AdminCardAPI() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -39,7 +39,7 @@ public class CardAPI extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String output = cardObj.insertInput(request.getParameter("cardNo"), request.getParameter("holderName"),
+		String output = cardObj.insertCard(request.getParameter("cardNo"), request.getParameter("holderName"),
 				request.getParameter("expiryDate"), request.getParameter("cvv"), request.getParameter("paymentNo"));
 		response.getWriter().write(output);
 	}
@@ -49,7 +49,7 @@ public class CardAPI extends HttpServlet {
 	 */
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Map paras = getParasMap(request);
-		 String output = cardObj.updateInput(paras.get("hidItemIDSave").toString(),
+		 String output = cardObj.updateCard(paras.get("hidIDSave").toString(),
 		 paras.get("holderName").toString(),
 		 paras.get("expiryDate").toString(),
 		paras.get("cvv").toString());

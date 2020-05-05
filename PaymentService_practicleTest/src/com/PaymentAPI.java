@@ -16,7 +16,7 @@ import java.util.Scanner;
 @WebServlet("/PaymentAPI")
 public class PaymentAPI extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	Payment itemObj = new Payment();
+	Payment paymentObj = new Payment();
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -38,7 +38,7 @@ public class PaymentAPI extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String output = itemObj.insertPayment(request.getParameter("patientId"), request.getParameter("appointmentId"),
+		String output = paymentObj.insertInput(request.getParameter("patientId"), request.getParameter("appointmentId"),
 				request.getParameter("paymentType"));
 		response.getWriter().write(output);
 	}
@@ -48,7 +48,7 @@ public class PaymentAPI extends HttpServlet {
 	 */
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Map paras = getParasMap(request);
-		 String output = itemObj.updatePayment(paras.get("hidItemIDSave").toString(),
+		 String output = paymentObj.updatePayment(paras.get("hidItemIDSave").toString(),
 		 paras.get("paymentType").toString(),
 		 paras.get("patientId").toString(),
 		paras.get("appointmentId").toString());
@@ -60,7 +60,7 @@ public class PaymentAPI extends HttpServlet {
 	 */
 	protected void doDelete(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Map paras = getParasMap(request);
-		 String output = itemObj.deletePayment(paras.get("paymentNo").toString());
+		 String output = paymentObj.deletePayment(paras.get("paymentNo").toString());
 		response.getWriter().write(output);
 	}
 	

@@ -6,15 +6,15 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Payment Service</title>
+<title>Admin Payment Service</title>
 <link rel="stylesheet" href="views/bootstrap.min.css.css">
 <script src="Components/jquery-3.4.1.min.js"></script>
-<script src="Components/card.js"></script>
+<script src="Components/adminCard.js"></script>
 </head>
 <body style="background-color:#B0C4DE;">
 <div style="text-align: center;position:relative;left:250px;top:50px;" class="container">
 		<div class="row">
-			<div style="background-color:#DCDCDC;height:750px;border-radius:10px;" class="col-6">
+			<div style="background-color:#DCDCDC;height:880px;border-radius:10px;" class="col-6">
 				<h1>Add Card</h1>
 				<form id="formItem" name="formItem">
 					Card No: 
@@ -35,14 +35,14 @@
 				<div id="alertSuccess" class="alert alert-success"></div>
 				<div id="alertError" class="alert alert-danger"></div>
 				<br>
-				<div id="divItemsGrid">
+				<div style="position:relative;right:20px;" id="divItemsGrid">
 					<%
 					Card cardObj = new Card();
-					out.print(cardObj.readInput());
+					out.print(cardObj.readCard());
 					%>
 				</div>
 				<br>
-				<a href="payment.jsp"><input type="button" value="Back" class="btn btn-primary"></a>
+				<a href="adminPayment.jsp"><input type="button" value="Back" class="btn btn-primary"></a>
 				<br>
 				
 			</div>

@@ -3,7 +3,6 @@ $(document).ready(function()
 if ($("#alertSuccess").text().trim() == "")
  {
  $("#alertSuccess").hide();
- $("#divItemsGrid").hide();
  }
  $("#alertError").hide();
 });
@@ -28,7 +27,7 @@ $(document).on("click", "#btnSave", function(event) {
 	// If valid------------------------
 	var type = ($("#hidIDSave").val() == "") ? "POST" : "PUT";
 	$.ajax({
-		url : "CardAPI",
+		url : "AdminCardAPI",
 		type : type,
 		data : $("#formItem").serialize(),
 		dataType : "text",
@@ -46,7 +45,6 @@ function onItemSaveComplete(response, status) {
 			$("#alertSuccess").text("Successfully saved.");
 			$("#alertSuccess").show();
 			$("#divItemsGrid").html(resultSet.data);
-			$("#divItemsGrid").show();
 		} else if (resultSet.status.trim() == "error") {
 			$("#alertError").text(resultSet.data);
 			$("#alertError").show();
@@ -75,7 +73,7 @@ $(document).on("click", ".btnUpdate", function(event) {
 // Delete============================================
 $(document).on("click", ".btnRemove", function(event) {
 	$.ajax({
-		url : "CardAPI",
+		url : "AdminCardAPI",
 		type : "DELETE",
 		data : "id=" + $(this).data("itemid"),
 		dataType : "text",

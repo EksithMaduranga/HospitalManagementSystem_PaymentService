@@ -3,7 +3,6 @@ $(document).ready(function()
 if ($("#alertSuccess").text().trim() == "")
  {
  $("#alertSuccess").hide();
- $("#divItemsGrid").hide();
  }
  $("#alertError").hide();
 });
@@ -28,7 +27,7 @@ $(document).on("click", "#btnSave", function(event) {
 	// If valid------------------------
 	var type = ($("#hidIDSave").val() == "") ? "POST" : "PUT";
 	$.ajax({
-		url : "CardAPI",
+		url : "AdminPaymentAPI",
 		type : type,
 		data : $("#formItem").serialize(),
 		dataType : "text",
@@ -46,7 +45,6 @@ function onItemSaveComplete(response, status) {
 			$("#alertSuccess").text("Successfully saved.");
 			$("#alertSuccess").show();
 			$("#divItemsGrid").html(resultSet.data);
-			$("#divItemsGrid").show();
 		} else if (resultSet.status.trim() == "error") {
 			$("#alertError").text(resultSet.data);
 			$("#alertError").show();
@@ -65,19 +63,17 @@ function onItemSaveComplete(response, status) {
 // UPDATE==========================================
 $(document).on("click", ".btnUpdate", function(event) {
 			$("#hidIDSave").val( $(this).closest("tr").find('#hidIDUpdate').val());
-			$("#cardNo").val($(this).closest("tr").find('td:eq(0)').text());
-			$("#holderName").val($(this).closest("tr").find('td:eq(2)').text());
-			$("#expiryDate").val($(this).closest("tr").find('td:eq(3)').text());
-			$("#cvv").val($(this).closest("tr").find('td:eq(4)').text());
-			$("#paymentNo").val($(this).closest("tr").find('td:eq(1)').text());
+			$("#paymentType").val($(this).closest("tr").find('td:eq(1)').text());
+			$("#appointmentId").val($(this).closest("tr").find('td:eq(4)').text());
+			$("#patientId").val($(this).closest("tr").find('td:eq(5)').text());
 		});
 
 // Delete============================================
 $(document).on("click", ".btnRemove", function(event) {
 	$.ajax({
-		url : "CardAPI",
+		url : "AdminPaymentAPI",
 		type : "DELETE",
-		data : "id=" + $(this).data("itemid"),
+		data : "paymentNo=" + $(this).data("itemid"),
 		dataType : "text",
 		complete : function(response, status) {
 			onItemDeleteComplete(response.responseText, status);
@@ -110,49 +106,35 @@ function onItemDeleteComplete(response, status) {
 function validateItemForm()
 {
 //paymentType
-if ($("#cardNo").val().trim() == "")
+if ($("#paymentType").val().trim() == "")
  {
- return "Insert Card No.";
+ return "Insert Payment Type.";
  }
 //appointmentId
-if ($("#holderName").val().trim() == "")
+if ($("#appointmentId").val().trim() == "")
  {
- return "Insert Cardholder Name.";
+ return "Insert Appointment ID.";
  } 
+
 //patientId-------------------------------
-if ($("#expiryDate").val().trim() == "")
+if ($("#patientId").val().trim() == "")
  {
- return "Insert Expiry Date.";
- }
-//cvv-------------------------------
-if ($("#cvv").val().trim() == "")
- {
- return "Insert CVV No.";
- }
-//paymentNo-------------------------------
-if ($("#paymentNo").val().trim() == "")
- {
- return "Insert Payment No.";
+ return "Insert patient ID.";
  }
 // is numerical value
-var tmpCNo = $("#cardNo").val().trim();
-if (!$.isNumeric(tmpCNo))
+var tmpAid = $("#appointmentId").val().trim();
+if (!$.isNumeric(tmpAid))
  {
- return "Insert a numerical value for Card No.";
+ return "Insert a numerical value for Appointment ID.";
  }
-var tmpCvv = $("#cvv").val().trim();
-if (!$.isNumeric(tmpCvv))
+var tmpPid = $("#patientId").val().trim();
+if (!$.isNumeric(tmpPid))
  {
- return "Insert a numerical value for CVV No.";
- }
-var tmpPNo = $("#paymentNo").val().trim();
-if (!$.isNumeric(tmpPNo))
- {
- return "Insert a numerical value for Payment No.";
+ return "Insert a numerical value for Patient ID.";
  }
 // convert to integer ID
- $("#cvv").val(parseInt(tmpCvv).toFixed(0));
- $("#paymentNo").val(parseInt(tmpPNo).toFixed(0));
+ $("#appointmentId").val(parseInt(tmpAid).toFixed(0));
+ $("#patientId").val(parseInt(tmpPid).toFixed(0));
 
 return true;
 }
