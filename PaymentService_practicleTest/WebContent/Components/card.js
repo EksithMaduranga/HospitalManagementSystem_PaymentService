@@ -134,6 +134,16 @@ if ($("#paymentNo").val().trim() == "")
  {
  return "Insert Payment No.";
  }
+//check card no size
+if ($("#cardNo").val().length != 16)
+{
+return "Enter a valid card number of 16 digits.";
+}
+//check cvv size
+if ($("#cvv").val().length != 3)
+{
+return "Enter a valid cvv of 3 digits.";
+}
 // is numerical value
 var tmpCNo = $("#cardNo").val().trim();
 if (!$.isNumeric(tmpCNo))

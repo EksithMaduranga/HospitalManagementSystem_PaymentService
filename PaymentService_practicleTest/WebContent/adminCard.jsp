@@ -14,7 +14,7 @@
 <body style="background-color:#B0C4DE;">
 <div style="text-align: center;position:relative;left:250px;top:50px;" class="container">
 		<div class="row">
-			<div style="background-color:#DCDCDC;height:900px;border-radius:10px;" class="col-6">
+			<div style="background-color:#DCDCDC;height:920px;border-radius:10px;" class="col-6">
 				<h1>Card Management Dashboard</h1>
 				<form id="formItem" name="formItem">
 					Card No: 

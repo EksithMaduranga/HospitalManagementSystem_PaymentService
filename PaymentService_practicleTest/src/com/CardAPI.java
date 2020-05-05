@@ -49,7 +49,7 @@ public class CardAPI extends HttpServlet {
 	 */
 	protected void doPut(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Map paras = getParasMap(request);
-		 String output = cardObj.updateInput(paras.get("hidItemIDSave").toString(),
+		 String output = cardObj.updateInput(paras.get("hidIDSave").toString(),
 		 paras.get("holderName").toString(),
 		 paras.get("expiryDate").toString(),
 		paras.get("cvv").toString());

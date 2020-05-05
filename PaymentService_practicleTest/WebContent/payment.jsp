@@ -22,7 +22,7 @@ $(document).ready(function(){
 <body style="background-color:#B0C4DE;">
 	<div style="text-align: center;position:relative;left:250px;top:50px;" class="container">
 		<div class="row">
-			<div style="background-color:#DCDCDC;height:620px;border-radius:10px;" class="col-6">
+			<div style="background-color:#DCDCDC;height:670px;border-radius:10px;" class="col-6">
 				<h1>Add Payment</h1>
 				<form id="formItem" name="formItem">
 					Payment Type: <br>
