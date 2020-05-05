@@ -14,8 +14,8 @@
 <body style="background-color:#B0C4DE;">
 <div style="text-align: center;position:relative;left:250px;top:50px;" class="container">
 		<div class="row">
-			<div style="background-color:#DCDCDC;height:880px;border-radius:10px;" class="col-6">
-				<h1>Add Card</h1>
+			<div style="background-color:#DCDCDC;height:900px;border-radius:10px;" class="col-6">
+				<h1>Card Management Dashboard</h1>
 				<form id="formItem" name="formItem">
 					Card No: 
 					<input id="cardNo" name="cardNo" type="text"class="form-control form-control-sm" placeholder="Enter Card No"> <br>
@@ -24,9 +24,9 @@
 					Expiry Date:
 					 <input id="expiryDate" name="expiryDate" type="date" class="form-control form-control-sm" placeholder="Enter Expiry Date"> <br>
 					 CVV:
-					 <input id="cvv" name="cvv" type="text" class="form-control form-control-sm" placeholder="Enter CVV "> <br>
+					 <input id="cvv" name="cvv" type="number" class="form-control form-control-sm" placeholder="Enter CVV "> <br>
 					 Payment No:
-					 <input id="paymentNo" name="paymentNo" type="text" class="form-control form-control-sm" placeholder="Enter Payment Number"> <br> 
+					 <input id="paymentNo" name="paymentNo" type="number" class="form-control form-control-sm" placeholder="Enter Payment Number"> <br> 
 					 
 					 <input id="btnSave" name="btnSave" type="button" value="Save" class="btn btn-primary"> 
 					 <input type="hidden" id="hidIDSave" name="hidIDSave" value="">
@@ -42,13 +42,13 @@
 					%>
 				</div>
 				<br>
-				<a href="adminPayment.jsp"><input type="button" value="Back" class="btn btn-primary"></a>
+				<a href="adminPayment.jsp"><input type="button" value="Back" class="btn btn-primary"></a><br><br>
+				<a href="home.jsp"><input type="button" value="Home page" class="btn btn-primary"></a>
 				<br>
 				
 			</div>
 		</div>
 	</div>
 
-</body>
-<%@include file="/Footer.jsp" %> 
+</body> 
 </html>
